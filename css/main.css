@@ -1,0 +1,159 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+    font-family: 'Roboto', sans-serif;
+}
+
+body {
+    width: 100%;
+    max-width: 800px;
+    min-height: 100vh;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    z-index: 1;
+    position: fixed;
+    top: 0;
+    width: inherit;
+    max-width: inherit;
+    color: #fff;
+    padding: 1em 1em 0.5em;
+    box-shadow: 2px 2px 2px 2px rgb(0,0,0,0.5);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    
+    padding-top: 0.25em;
+}
+
+form > select  {
+    font-size: 1rem;
+    padding: 0.25rem;
+    height: 40px;
+    width: 100%;
+    max-width: 270px;
+    border-radius: 0.75rem;
+}
+
+main {
+    flex-grow: 1;
+    padding: 107px 0 40px;
+    border: 1px solid #333;
+}
+
+article {
+    padding: 1rem;
+    margin: 1rem;
+    border: 1px solid #333;
+    border-radius: 1rem;
+    box-shadow: 2px 2px 5px 2px rgb(0,0,0,0.5);
+}
+
+article > p {
+    margin-top: 0.25rem;
+}
+
+article > p:nth-child(5) {
+    font-style: italic;
+}
+
+article > button {
+    padding: 0.5em;
+    margin-top: 0.5em;
+    border-radius: 0.5rem;
+    background-color: #333;
+    color: #fff;
+}
+
+.default-text {
+    padding: 1rem;
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.comments {
+   font-size: 0.8rem;
+   animation: showComments 0.5s ease-in-out forwards;
+   transform-origin: top center;
+}
+
+.hide {
+    display: none;
+}
+
+
+@keyframes showComments {
+    0% {
+      transform: scaleY(0);
+    }
+    100% {
+      transform: scaleY(1);
+    }
+  }
+
+footer {
+    position: fixed;
+    bottom: 0;
+    width: inherit;
+    max-width: inherit;
+    min-height: 40px;
+    display: grid;
+    place-content: center;
+    color: #fff;
+}
+
+@media only screen and (min-width: 400px) {
+    form {
+        flex-direction: row;
+    }
+
+    form > select  {
+        font-size: 1.4rem;
+        max-width: 290px;
+        margin-right: 10px;
+    }
+
+}
+
+@media only screen and (min-width: 800px) {
+    body {
+        box-shadow: 2px 2px 2px 2px rgb(0,0,0,0.5);
+    }
+
+    header {
+        box-shadow: none;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    body { background-color: #000; }
+    header, footer { background-color: #1a1a1a;} 
+    article { background-color: #2b323b; }
+    main {
+      background-color: #21262d;
+      color: #fff;
+    }
+} 
+
+@media (prefers-color-scheme: light) {
+    body { background-color: tan; }
+    header, footer { background-color: #333;} 
+    article { background-color: #fff; }
+    main {
+      background-color: #fff;
+      color: #333;
+    }
+}
