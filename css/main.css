@@ -64,6 +64,7 @@ header, footer {
     width: 100%;
     padding: 1rem;
     position: sticky;
+    z-index: 1;
 }
 
 header {
