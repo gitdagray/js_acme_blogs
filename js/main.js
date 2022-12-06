@@ -124,60 +124,48 @@ function deleteChildElements(param) {
 
 // #6
 
-function addButtonListeners() {
-  const buttons = document.querySelectorAll("main button");
-  buttons.forEach((button) => {
-    const postId = button.dataset.postId;
-    button.addEventListener("click", (event) => {});
-  });
-
+const addButtonListeners = () => {
+  const buttons = document.querySelectorAll('main button');
+  if(buttons.length) {
+    for(const button of buttons){
+      const postId = button.dataset.postId;
+      button.addEventListener('click', event => {
+      toggleComments(event, postId);
+      })
+    }
+  }
   return buttons;
 }
 
 // #7
 
-function removeButtonListeners() {
-  var buttons = document.getElementById("mainDiv").querySelectorAll("button");
-  console.log(buttons); //used to see the buttons in the console.this line can be omitted.
-  for (let i = 0; i < buttons.length; i++) {
-    let button = buttons[i];
-    document
-      .getElementById(button.id)
-      .removeEventListener("click", toggleComments);
+const removeButtonListeners = () => {
+  const buttons = document.querySelectorAll('main button');
+  if(buttons.length){
+    for (const button of buttons){
+      const postId = button.dataset.postId;
+      button.removeEventListener('click', event => {
+        toggleComments(event, postId);
+      });
+    }
   }
+  return buttons;
 }
 
 // #8
 
-function createComments(comments) {
-  //The function createComments should return undefined if it does not receive a parameter.
-  if (!comments) {
-    return undefined;
+const createComments = jsonComments => {
+  if(!jsonComments) return;
+  const docFrag = document.createDocumentFragment();
+  for (const comment of jsonComments){
+    const article = document.createElement('article');
+    const h3 = createElemWithText('h3', comment.name);
+    const p1 = createElemWithText('p', comment.body);
+    const p2 = createElemWithText('p', `From: ${comment.email}`);
+    article.append(h3, p1, p2);
+    docFrag.append(article);
   }
-  // b. Receives JSON comments data as a parameter
-  // c. Creates a fragment element with document.createDocumentFragment()
-  let frag = document.createDocumentFragment();
-  // d.Loop through the comments
-  for (let i = 0; i < comments.length; i++) {
-    const element = comments[i];
-    // e. For each comment do the following:
-    // f. Create an article element with document.createElement()
-    let a = document.createElement("a");
-    // g. Create an h3 element with createElemWithText('h3', comment.name)
-    let h3 = createElemWithText("h3", comment.name);
-    // h. Create an paragraph element with createElemWithText('p', comment.body)
-    let p1 = createElemWithText("p", comment.body);
-    // i. Create an paragraph element with createElemWithText('p', `From: ${comment.email}`)
-    let p2 = createElemWithText("p", `From: ${comment.email}`);
-    // j. Append the h3 and paragraphs to the article element (see cheatsheet)
-    a.appendChild(h3);
-    a.appendChild(p);
-    a.appendChild(p);
-    // k. Append the article element to the fragment
-    frag.appendChild(a);
-  }
-  // l. Return the fragment element
-  return frag;
+  return docFrag
 }
 
 // #9
@@ -363,12 +351,17 @@ const refreshPosts = async (posts) => {
 
 // #19
 
-const selectMenuChangeEventHandler = async (e) => {
-  let userId = e?.target?.value || 1;
-  let posts = await getUserPosts(userId);
-  let refreshPostsArray = await refreshPosts(posts);
-  return [userId, posts, refreshPostsArray];
-};
+const selectMenuChangeEventHandler = async event => {
+  if(!event) return;
+  const select = document.getElementById('selectMenu');
+  select.disabled = true;
+  const userId = event?.target?.value || 1;
+  const postData = await getUserPosts(userId);
+  const refreshedPosts = await refreshPosts(postData);
+  select.disabled = false;
+  return [userId, postData,refreshedPosts];
+
+}
 
 // #20
 
