@@ -225,7 +225,7 @@ function populateSelectMenu(usersData) {
 async function getUsers() {
     try {
         // fetch users data from URL
-        const response = await fetch("https://jsonplaceholder.typicode.com/");
+        const response = await fetch("https://jsonplaceholder.typicode.com/users");
 
         // await response
         return await response.json();
@@ -239,6 +239,8 @@ async function getUsers() {
 // input: userId of the user whose posts we are fetching
 // output: user's posts as JSON data
 async function getUserPosts(userId) {
+    if (!userId) return;
+    
     try {
         // fetch users data from URL
         const response = await fetch(`https://jsonplaceholder.typicode.com/users/${userId}/posts`);
