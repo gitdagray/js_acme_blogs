@@ -39,7 +39,7 @@ function createSelectOptions(data) {
 
         // return option, which adds it to options array
         return option;
-    })
+    });
 
     // return options
     return options;
@@ -226,7 +226,7 @@ async function getUsers() {
     try {
         // fetch users data from URL
         const response = await fetch("https://jsonplaceholder.typicode.com/users");
-
+        
         // await response
         return await response.json();
     } catch (error) {
@@ -244,7 +244,7 @@ async function getUserPosts(userId) {
     try {
         // fetch users data from URL
         const response = await fetch(`https://jsonplaceholder.typicode.com/users/${userId}/posts`);
-
+        
         // await response
         return await response.json();
     } catch (error) {
@@ -262,7 +262,7 @@ async function getUser(userId) {
     try {
         // fetch users data from URL
         const response = await fetch(`https://jsonplaceholder.typicode.com/users/${userId}`);
-
+        
         // await response
         return await response.json();
     } catch (error) {
@@ -280,7 +280,7 @@ async function getPostComments(postId) {
     try {
         // fetch users data from URL
         const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${postId}/comments`);
-
+        
         // await response
         return await response.json();
     } catch (error) {
@@ -326,11 +326,12 @@ async function displayComments(postId) {
 // input:   posts JSON data
 // output:  returns the fragment element of the posts
 async function createPosts(postsData) {
+    if(!postsData) return;
     // return undefined if postsData is not a JSON object
-    if (typeof postsData !== 'object' ||
+    if(typeof postsData !== 'object' ||
     postsData === null ||
     Array.isArray(postsData)) return;
-    
+
     // create fragment
     const fragment = document.createDocumentFragment();
 
@@ -338,22 +339,22 @@ async function createPosts(postsData) {
     for (const post of postsData) {
         // article element
         const article = document.createElement("article");
-
+        
         // h2 element
         const h2 = createElemWithText("h2", post.title);
-
+        
         // post body
         const postBody = createElemWithText("p", post.body);
-
+        
         // post id
         const postId = createElemWithText("p", `Post ID: ${post.id}`);
-
+        
         // author
         const author = await getUser(post.userId);
-
+        
         // author text
         const authorText = createElemWithText("p", `Author: ${author.name} with ${author.company.name}`);
-
+        
         // catch phrase
         const catchPhrase = createElemWithText("p", author.company.catchPhrase);
 
@@ -389,9 +390,6 @@ async function createPosts(postsData) {
 // input:   postsData to be displayed
 // output:  return the element for the post that is displayed
 async function displayPosts(postsData) {
-    // conditional for if postsData is null
-    if (!postsData) return;
-    
     // get main element
     const main = document.querySelector('main');
 
