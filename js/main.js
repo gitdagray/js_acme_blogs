@@ -253,10 +253,12 @@ async function getUserPosts(userId) {
     }
 }
 
-// 12. getUserPosts
+// 12. getUser
 // input: userId of the user whose data we are fetching
 // output: user's posts as JSON data
 async function getUser(userId) {
+    if (!userId) return;
+
     try {
         // fetch users data from URL
         const response = await fetch(`https://jsonplaceholder.typicode.com/users/${userId}`);
@@ -273,6 +275,8 @@ async function getUser(userId) {
 // input: postId of the user whose data we are fetching
 // output: post comments as JSON data
 async function getPostComments(postId) {
+    if (!postId) return;
+    
     try {
         // fetch users data from URL
         const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${postId}`);
@@ -289,6 +293,8 @@ async function getPostComments(postId) {
 // input:   postId of the post
 // output:  returns the section element of the post
 async function displayComments(postId) {
+    if (!postId) return;
+    
     // create section element
     const section = document.createElement("section");
 
@@ -320,6 +326,8 @@ async function displayComments(postId) {
 // input:   posts JSON data
 // output:  returns the fragment element of the posts
 async function createPosts(postsData) {
+    if(postsData) return;
+    
     // create fragment
     const fragment = document.createDocumentFragment();
 
@@ -382,7 +390,7 @@ async function displayPosts(postsData) {
     const main = document.querySelector('main');
 
     // Use ternary operator to define element
-    const element = postsData ? await createPosts(postsData) : createElemWithText("p", "No posts available.");
+    const element = postsData ? await createPosts(postsData) : createElemWithText("p", "Select an Employee to display their posts.");
 
     // append element to main
     main.appendChild(element);
@@ -396,6 +404,8 @@ async function displayPosts(postsData) {
 //          postId that we want comments toggled on
 // output:  array of section element from toggleCommentSection and button from toggleCommentButton
 function toggleComments(event, postId) {
+    if (!postId) return;
+    
     // set event.target.listener to true per function description
     event.target.listener = true;
 
@@ -413,6 +423,8 @@ function toggleComments(event, postId) {
 // input:   postsData as JSON data
 // output:  Returns array of results from removeButtons, main, fragment, and addButtons
 async function refreshPosts(postsData) {
+    if (!postsData) return;
+    
     // call removeButtonListeners
     const removeButtons = removeButtonListeners();
 
@@ -433,6 +445,8 @@ async function refreshPosts(postsData) {
 // input:   event
 // output:  returns array of userId, posts, and array returned from refreshPosts
 async function selectMenuChangeEventHandler(event) {
+    if (!event) return;
+    
     // disable select menu
     event.target.disabled = true
     
