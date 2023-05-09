@@ -279,7 +279,7 @@ async function getPostComments(postId) {
     
     try {
         // fetch users data from URL
-        const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${postId}`);
+        const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${postId}/comments`);
 
         // await response
         return await response.json();
