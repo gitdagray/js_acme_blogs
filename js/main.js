@@ -327,7 +327,7 @@ async function displayComments(postId) {
 // output:  returns the fragment element of the posts
 async function createPosts(postsData) {
     // return undefined if postsData is not a JSON object
-    if(typeof postsData !== 'object' ||
+    if (typeof postsData !== 'object' ||
     postsData === null ||
     Array.isArray(postsData)) return;
     
@@ -389,6 +389,9 @@ async function createPosts(postsData) {
 // input:   postsData to be displayed
 // output:  return the element for the post that is displayed
 async function displayPosts(postsData) {
+    // conditional for if postsData is null
+    if (!postsData) return;
+    
     // get main element
     const main = document.querySelector('main');
 
