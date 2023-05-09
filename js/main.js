@@ -394,7 +394,7 @@ async function displayPosts(postsData) {
     const main = document.querySelector('main');
 
     // Use ternary operator to define element
-    const element = postsData ? await createPosts(postsData) : createElemWithText("p", "Select an Employee to display their posts.");
+    const element = postsData ? await createPosts(postsData) : document.querySelector('.default-text');
 
     // append element to main
     main.appendChild(element);
