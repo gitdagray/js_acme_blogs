@@ -326,7 +326,7 @@ async function displayComments(postId) {
 // input:   posts JSON data
 // output:  returns the fragment element of the posts
 async function createPosts(postsData) {
-    if(postsData) return;
+    if(!postsData) return;
     
     // create fragment
     const fragment = document.createDocumentFragment();
