@@ -84,7 +84,7 @@ function toggleCommentButton(postId) {
 // input:   parentElement of the child elements to delete
 // output:  parentElement of the deleted child elements
 function deleteChildElements(parentElement) {
-    if (!parentElement) return;
+    if (!parentElement || parentElement instanceof HTMLElement === false) return;
 
     // get the first childElement
     let childElement = parentElement.lastElementChild;
