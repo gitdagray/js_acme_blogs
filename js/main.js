@@ -70,9 +70,11 @@ function toggleCommentButton(postId) {
     
     // get the button
     const button = document.querySelector(`button[data-post-id="${postId}"]`);
-
-    // use a ternary operator to assign button.textContent whichever value it is not
-    button.textContent = button.textContent === "Show Comments" ? "Hide Comments" : "Show Comments";
+    
+    if (button) {
+        // use a ternary operator to assign button.textContent whichever value it is not
+        button.textContent = button.textContent === "Show Comments" ? "Hide Comments" : "Show Comments";
+    }
 
     // return button
     return button;
