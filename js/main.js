@@ -326,7 +326,6 @@ async function displayComments(postId) {
 // input:   posts JSON data
 // output:  returns the fragment element of the posts
 async function createPosts(postsData) {
-    if(!postsData) return;
     // return undefined if postsData is not a JSON object
     if(typeof postsData !== 'object' ||
     postsData === null ||
