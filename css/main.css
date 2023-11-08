@@ -14,7 +14,7 @@ html {
 body {
     width: 100%;
     max-width: 800px;
-    min-height: 100vh;
+    min-height: 200vh;
     margin: auto;
     display: flex;
     flex-direction: column;
